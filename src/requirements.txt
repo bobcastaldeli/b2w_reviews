@@ -7,7 +7,10 @@ jupyterlab_server>=2.11.1, <2.16.0
 jupyterlab~=3.0
 kedro~=0.18.4
 kedro-telemetry~=0.2.0
+kedro-viz>=5.2.1
 nbstripout~=0.4
 pytest-cov~=3.0
 pytest-mock>=1.7.1, <2.0
 pytest~=6.2
+datasets
+embetter
