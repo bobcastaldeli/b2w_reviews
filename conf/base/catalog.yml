@@ -7,5 +7,4 @@
 reviews_data:
   type: pandas.CSVDataSet
   path: data/01_raw/reviews.csv
-  dataset: reviews
   layer: raw
