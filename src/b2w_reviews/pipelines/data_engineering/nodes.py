@@ -51,3 +51,14 @@ def drop_null_values(dataframe: pd.DataFrame, column: str):
     """
     dataframe = dataframe.dropna(subset=[column])
     return dataframe
+
+
+def save_dataframe(dataframe: pd.DataFrame, path: str):
+    """
+    Save the dataframe in a csv file
+    
+    Args:
+        dataframe: dataframe to be saved
+        path: path to save the dataframe
+    """
+    return dataframe.to_csv(path, index=False)
