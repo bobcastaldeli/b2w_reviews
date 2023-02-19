@@ -8,3 +8,8 @@ reviews_data:
   type: pandas.CSVDataSet
   path: data/01_raw/reviews.csv
   layer: raw
+
+reviews_cleaned:
+  type: pandas.CSVDataSet
+  path: data/02_intermediate/reviews_cleaned.csv
+  layer: intermediate
