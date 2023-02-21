@@ -5,51 +5,44 @@ This module contains the pipeline for the data engineering process.
 
 from kedro.pipeline import Pipeline, node
 from .nodes import (
-    process_data,
-    split_data,
-    train_model,
-    evaluate_model,
-    save_model,
-    save_metrics,
+    load_reviews_dataset,
+    read_reviews_dataset,
+    drop_null_values,
+    save_dataframe,
 )
 
 
 def create_pipeline(**kwargs):
+
     return Pipeline(
         [
             node(
-                func=process_data,
+                func=load_reviews_dataset,
+                inputs=None,
+                outputs="reviews",
+                name="load_reviews_dataset",
+                params={"dataset": "b2w_reviews", "path": "data/01_raw/reviews.csv"},
+            ),
+            node(
+                func=read_reviews_dataset,
                 inputs="reviews",
-                outputs="processed_reviews",
-                name="process_data",
+                outputs="reviews",
+                name="read_reviews_dataset",
+                params={"path": "data/01_raw/reviews.csv"},
             ),
             node(
-                func=split_data,
-                inputs="processed_reviews",
-                outputs=["X_train", "X_test", "y_train", "y_test"],
-                name="split_data",
+                func=drop_null_values,
+                inputs="reviews",
+                outputs="reviews",
+                name="drop_null_values",
+                params={"column": "product_name"},
             ),
             node(
-                func=train_model,
-                inputs=["X_train", "y_train"],
-                outputs="model",
-                name="train_model",
-            ),
-            node(
-                func=evaluate_model,
-                inputs=["model", "X_test", "y_test"],
-                outputs="metrics",
-                name="evaluate_model",
-            ),
-            node(
-                func=save_model,
-                inputs=["model", "X_train"],
-                name="save_model",
-            ),
-            node(
-                func=save_metrics,
-                inputs=["metrics"],
-                name="save_metrics",
+                func=save_dataframe,
+                inputs="reviews",
+                outputs=None,
+                name="save_dataframe",
+                params={"path": "data/02_intermediate/reviews.csv"},
             ),
         ]
     )
