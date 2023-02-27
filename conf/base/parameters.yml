@@ -1,5 +1,5 @@
-parameters:
-    dataset:
-        name: ruanchaves/b2w-reviews01
-        split: train
-        path: data/01_raw/reviews.csv
+name: ruanchaves/b2w-reviews01
+split: train
+columns:
+  - product_name
+  - review_text

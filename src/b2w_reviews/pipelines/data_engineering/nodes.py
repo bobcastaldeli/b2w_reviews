@@ -2,43 +2,63 @@
 This script contains nodes containing functions for pipeline
 """
 import yaml
+from typing import Any, Callable, Dict, Tuple
 import datasets
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 
-with open('conf/base/parameters.yml', 'r') as f:
-    params = yaml.safe_load(f)['parameters']
+#with open('conf/base/parameters.yml', 'r') as f:
+#    params = yaml.safe_load(f)['parameters']
 
 
-def download_reviews():
+def download_reviews(parameters: Dict[str, Any]):
     """
     Load the reviews dataset from the datasets library. 
     and save in a csv file in data folder
     
     Args:
-        params: parameters from parameters.yml file
+        parameters: parameters from parameters.yml file
     
     Returns:
         reviews: B2W reviews dataset from huggingface datasets library
-    """
-    dataset_name = params['dataset']['name']
-    dataset_split = params['dataset']['split']
-    dataset_path = params['dataset']['path']
+    """  
 
     # load the dataset
-    reviews = datasets.load_dataset(dataset_name)
-    return reviews[dataset_split].to_csv(dataset_path, index=False)
+    dataset = datasets.load_dataset(parameters['name'])
+    return dataset[parameters['split']].to_pandas()
 
-def drop_null_values(dataframe: pd.DataFrame, column: str):
+
+
+def drop_null_values(dataframe: pd.DataFrame, parameters: list) -> pd.DataFrame:
     """
-    Drop all the rows with null values in a column
+    Drop null values from the dataframe
     
     Args:
         dataframe: dataframe to be cleaned
-        column: column to be checked
+        parameters: parameters from parameters.yml file
     
     Returns:
         dataframe: cleaned dataframe
     """
-    dataframe = dataframe.dropna(subset=[column])
-    return dataframe
+    print(f"Input data columns: {dataframe.columns}")
+    print(f"Columns to drop nulls from: {parameters['columns']}")
+    cleaned_data = dataframe.dropna(subset=parameters['columns'])
+    return cleaned_data
+
+
+def split_data(dataframe: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Split the dataframe into train and test
+    
+    Args:
+        dataframe: dataframe to be split
+    
+    Returns:
+        train: train dataframe
+        test: test dataframe
+    """
+    X = pd.DataFrame(dataframe['review_text'])
+    y = pd.DataFrame(dataframe['overall_rating'])
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    return X_train, X_test

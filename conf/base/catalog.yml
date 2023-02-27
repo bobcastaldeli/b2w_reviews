@@ -2,3 +2,14 @@
 #
 # Documentation for this file format can be found in "The Data Catalog"
 # Link: https://kedro.readthedocs.io/en/stable/data/data_catalog.html
+# The catalog.yml file is used to define the data sets that you want to use
+# in your Kedro project. You can use the data sets to load and save data
+# from/to different data sources.
+
+reviews_raw:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/reviews.csv
+
+reviews_cleaned:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/reviews_cleaned.csv
