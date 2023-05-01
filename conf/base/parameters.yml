@@ -4,6 +4,7 @@ columns:
   - product_name
   - review_text
 textcolumn: 'review_text'
-sentimentcolumn: 'overall_rating'
+ratingcolumn: 'overall_rating'
+sentimentcolumn: 'sentiment'
 testsize: 0.2
 randomseed: 42

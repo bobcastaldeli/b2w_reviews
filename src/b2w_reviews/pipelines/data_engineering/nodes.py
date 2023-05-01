@@ -29,7 +29,6 @@ def download_reviews(parameters: Dict[str, Any]):
     return dataset[parameters['split']].to_pandas()
 
 
-
 def drop_null_values(dataframe: pd.DataFrame, parameters: list) -> pd.DataFrame:
     """
     Drop null values from the dataframe
@@ -47,18 +46,19 @@ def drop_null_values(dataframe: pd.DataFrame, parameters: list) -> pd.DataFrame:
     return cleaned_data
 
 
-def split_data(dataframe: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    """
-    Split the dataframe into train and test
-    
+def clean_review(dataframe: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
+    """Node for cleaning reviews text
     Args:
-        dataframe: dataframe to be split
-    
-    Returns:
-        train: train dataframe
-        test: test dataframe
+        dataframe: A pandas dataframe.
+        parameters: A dictionary of parameters.
+    Returns:,
+        pd.DataFrame: The data from the node.
     """
-    X = pd.DataFrame(dataframe['review_text'])
-    y = pd.DataFrame(dataframe['overall_rating'])
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    return X_train, X_test
+    dataframe[parameters['sentimentcolumn']] = [
+        'positivo' if x >= 4 else 'negativo' for x in dataframe[parameters['ratingcolumn']]
+    ]
+    dataframe[parameters['textcolumn']] = dataframe[parameters['textcolumn']].str.lower()
+    dataframe[parameters['textcolumn']] = dataframe[parameters['textcolumn']].str.replace(r'[^\w\s]+', '')
+    dataframe[parameters['textcolumn']] = dataframe[parameters['textcolumn']].str.replace(r'\n', ' ')   
+    reviews = dataframe.dropna(subset=[parameters['textcolumn']])
+    return reviews

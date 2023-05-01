@@ -2,7 +2,7 @@
 This module contains the pipeline for the data engineering process.
 """
 from kedro.pipeline import Pipeline, pipeline, node
-from .nodes import download_reviews, drop_null_values
+from .nodes import download_reviews, drop_null_values, clean_review
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -18,8 +18,14 @@ def create_pipeline(**kwargs) -> Pipeline:
             node(
                 func=drop_null_values,
                 inputs=["reviews_raw", "parameters"],
-                outputs="reviews_cleaned",
+                outputs="reviews_primary",
                 name="drop_null_values",
+            ),
+            node(
+                func=clean_review,
+                inputs=["reviews_primary", "parameters"],
+                outputs="reviews_features",
+                name="clean_review",
             ),
         ]
     )

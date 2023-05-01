@@ -10,9 +10,13 @@ reviews_raw:
   type: pandas.CSVDataSet
   filepath: data/01_raw/reviews.csv
 
-reviews_cleaned:
+reviews_primary:
   type: pandas.CSVDataSet
-  filepath: data/02_intermediate/reviews_cleaned.csv
+  filepath: data/02_primary/reviews_primary.csv
+
+reviews_features:
+  type: pandas.CSVDataSet
+  filepath: data/04_feature/reviews_features.csv
 
 train_set:
   type: pandas.CSVDataSet
