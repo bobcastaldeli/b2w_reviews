@@ -8,3 +8,4 @@ ratingcolumn: 'overall_rating'
 sentimentcolumn: 'sentiment'
 testsize: 0.2
 randomseed: 42
+sentencemodel: 'ricardo-filho/bert-base-portuguese-cased-nli-assin-2'

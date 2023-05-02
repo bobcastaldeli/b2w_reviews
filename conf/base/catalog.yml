@@ -25,3 +25,13 @@ train_set:
 test_set:
   type: pandas.CSVDataSet
   filepath: data/05_model_input/test.csv
+
+model:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/model.pkl
+  backend: pickle
+
+labels:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/labels.pkl
+  backend: pickle
