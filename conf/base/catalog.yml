@@ -35,3 +35,7 @@ labels:
   type: pickle.PickleDataSet
   filepath: data/06_models/labels.pkl
   backend: pickle
+
+predictions:
+  type: pandas.CSVDataSet
+  filepath: data/07_model_output/predictions.csv

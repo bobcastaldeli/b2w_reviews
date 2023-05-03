@@ -66,3 +66,20 @@ def train_model(
     )
     pipeline.fit(train_features, train_label)
     return pipeline, label_encoder
+
+
+def predict_model(
+    model: Tuple[Callable, Dict[str, Any]], test_set: pd.DataFrame, parameters: Dict[str, Any]
+) -> pd.DataFrame:
+    """Node for predicting the test set.
+    Args:
+        model: The trained model.
+        X_test: The test set features.
+    Returns:
+        y_pred: The predicted targets.
+    """
+    pipeline = model
+    test_set[parameters["textcolumn"]] = test_set[parameters["textcolumn"]].astype(str)
+    test_features = pd.DataFrame(test_set[parameters["textcolumn"]])
+    y_pred = pd.DataFrame(pipeline.predict(test_features))
+    return y_pred
