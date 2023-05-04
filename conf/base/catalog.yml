@@ -39,3 +39,7 @@ labels:
 predictions:
   type: pandas.CSVDataSet
   filepath: data/07_model_output/predictions.csv
+
+metrics:
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/metrics.csv
