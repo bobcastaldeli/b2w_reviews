@@ -1,0 +1,24 @@
+-c requirements.txt
+pre-commit
+pre-commit-hooks
+black~=22.0
+flake8>=3.7.9
+ipython>=7.31.1, <8.0
+isort~=5.0
+kedro~=0.18.4
+kedro-telemetry~=0.2.0
+kedro-viz>=5.2.1
+nbstripout~=0.4
+pytest-cov~=3.0
+pytest-mock>=1.7.1, <2.0
+pytest~=6.2
+python-dotenv>=0.5.1
+notebook
+pylint
+nb_black
+pip-tools
+Sphinx
+nbmake
+nbqa
+tox
+squarify

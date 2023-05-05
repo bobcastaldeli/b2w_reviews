@@ -1,0 +1,12 @@
+matplotlib
+seaborn
+plotly
+scikit-learn==1.2.2
+datasets
+transformers
+sentence-transformers
+embetter[text]
+umap-learn
+fastapi
+pydantic
+streamlit

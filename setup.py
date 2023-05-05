@@ -1,8 +1,6 @@
 from setuptools import find_packages, setup
 
-entry_point = (
-    "b2w-reviews = b2w_reviews.__main__:main"
-)
+entry_point = "b2w-reviews = b2w_reviews.__main__:main"
 
 
 # get the dependencies and installs

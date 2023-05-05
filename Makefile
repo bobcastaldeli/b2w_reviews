@@ -6,7 +6,7 @@
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PYTHON_INTERPRETER = python
-CONFIG_FILE=configs.ini
+CONFIG_FILE=setup.cfg
 CONFIG_KEY_NAME=required_python
 
 #################################################################################

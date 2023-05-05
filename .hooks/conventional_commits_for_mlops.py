@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Conventional commit for Machine Learning Ops."""
+"""Conventional commit for Data Engineering."""
 
 import sys
 import re
@@ -106,8 +106,10 @@ def check_header_is_meaningful(msg):
     """
     if len(msg.split(":")) < 2:
         print(
-            "ERROR: Commit message header is not meaningful. It should be of"
-            " the form '<prefix>(optional): <message>'",
+            (
+                "ERROR: Commit message header is not meaningful. It should be"
+                " of the form '<prefix>(optional): <message>'"
+            ),
             file=sys.stderr,
         )
         return False
