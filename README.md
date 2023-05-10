@@ -15,15 +15,44 @@ In order to get the best out of the template:
 * Don't commit data to your repository
 * Don't commit any credentials or your local configuration to your repository. Keep all your credentials and local configuration in `conf/local/`
 
-## How to install dependencies
+## Pre-requisites
 
-Declare any dependencies in `src/requirements.txt` for `pip` installation and `src/environment.yml` for `conda` installation.
+**Ubuntu/Debian/Mint**
 
-To install them, run:
+The GNU/Linux Make utility is required to run the Makefile. To install it, run the following command:
 
+```bash
+sudo apt-get install build-essential
 ```
-pip install -r src/requirements.txt
+
+Also, the Python 3 interpreter is required to run the project. To install it, run the following command:
+
+```bash
+sudo apt-get install python3
 ```
+
+## Environment Setup
+
+To set up the environment, run the following command:
+
+```bash
+python3 -m venv ~/path/to/venv
+```
+
+To activate the environment, run the following command:
+
+```bash
+source ~/path/to/venv/bin/activate
+```
+
+## Install Dependencies
+
+To install the dependencies, run the following command:
+
+```bash
+make requirements
+```
+
 
 ## How to run your Kedro pipeline
 
@@ -42,20 +71,6 @@ kedro test
 ```
 
 To configure the coverage threshold, go to the `.coveragerc` file.
-
-## Project dependencies
-
-To generate or update the dependency requirements for your project:
-
-```
-kedro build-reqs
-```
-
-This will `pip-compile` the contents of `src/requirements.txt` into a new file `src/requirements.lock`. You can see the output of the resolution by opening `src/requirements.lock`.
-
-After this, if you'd like to update your project requirements, please update `src/requirements.txt` and re-run `kedro build-reqs`.
-
-[Further information about project dependencies](https://kedro.readthedocs.io/en/stable/kedro_project_setup/dependencies.html#project-specific-dependencies)
 
 ## How to work with Kedro and notebooks
 
