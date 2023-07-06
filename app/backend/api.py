@@ -4,6 +4,7 @@ import pickle
 import uvicorn
 import pandas as pd
 from fastapi import FastAPI, HTTPException
+from fastapi.encoders import jsonable_encoder
 from reviews_data import ReviewData
 
 
@@ -20,11 +21,11 @@ def root():
 def predict(data: ReviewData):
     """This endpoint takes in a TextData object and returns a prediction."""
     # Load the model
-    with open("data/06_models/model.pkl", "rb") as f:
+    with open("../../data/06_models/model.pkl", "rb") as f:
         model = pickle.load(f)
 
-    # transform the data into a dataframe
-    payload = pd.DataFrame(data.dict(), index=[0])
+    # encode the data
+    payload = jsonable_encoder(data)
 
     prediction = model.predict(payload)
     probability = model.predict_proba(payload)
